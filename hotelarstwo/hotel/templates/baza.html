@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  {% if user.is_authenticated %}
+    <center><h2>Witamy w hotelu</h2></center>
+    <p>Witaj, {{ user.username }}!</p>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <h4>Nasze pokoje:</h4>
+
+      <button type="submit">Zarezerwuj</button>
+      <p><a href="{% url 'dodawanie' %}">Dodaj pokoje</a></p>
+    </form>
+    <p><a href="{% url 'wylogowanie' %}">Wyloguj się</a></p>
+  {% else %}
+    <p>Musisz być zalogowany, aby zobaczyć tę stronę.</p>
+  {% endif %}
+</body>
+</html>

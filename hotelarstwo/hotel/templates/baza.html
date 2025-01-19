@@ -4,18 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
   <title>Document</title>
 </head>
 <body>
   {% if user.is_authenticated %}
     <center><h2>Witamy w hotelu</h2></center>
     <p>Witaj, {{ user.username }}!</p>
-    <form method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <h4>Nasze pokoje:</h4>
-
-      <button type="submit">Zarezerwuj</button>
+    <h4>Nasze pokoje:</h4>
+    {% for pokoj in pokoje %}
+      <div>
+        Numer pokoju: {{ pokoj.numer }} -
+        {% if pokoj.czy_wolny %}
+          Dostępny
+        {% else %}
+          Niedostępny
+        {% endif %}
+      </div>
+    {% endfor %}
       <p><a href="{% url 'dodawanie' %}">Dodaj pokoje</a></p>
     </form>
     <p><a href="{% url 'wylogowanie' %}">Wyloguj się</a></p>

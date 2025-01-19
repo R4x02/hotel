@@ -1,10 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Dodaj Pokój</title>
 </head>
 <body>
-
+  <h2>Dodaj Nowy Pokój</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Dodaj Pokój</button>
+    </form>
+    {% if form.is_valid %}
+      <p>Pokój został pomyślnie dodany!</p>
+    {% endif %}
+    <p><a href="{% url 'strona_glowna' %}">Powrót do listy pokoi</a></p>
 </body>
 </html>

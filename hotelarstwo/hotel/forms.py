@@ -27,3 +27,6 @@ class tworzeniepokoju(forms.ModelForm):
     class Meta:
         model = Pokoje
         fields = ['numer', 'pojemnosc_pokoju', 'czy_wolny']
+
+class dolacz(forms.Form):
+    pokoj = forms.ModelChoiceField(queryset=Pokoje.objects.all())

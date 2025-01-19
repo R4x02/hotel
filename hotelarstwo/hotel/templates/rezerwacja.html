@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Dostepne pokoje: </h1>
+        {% if Pokoje %}
+            <ul class="team-list">
+                {% for pokoj in Pokoje %}
+                    <button class="team-name">{{ pokoj.numer }}</button>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nie ma żadnych pokoi</p>
+        {% endif %}
+</body>
+</html>

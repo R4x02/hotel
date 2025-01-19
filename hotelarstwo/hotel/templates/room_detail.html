@@ -1,0 +1,22 @@
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+
+<h1>Szczegóły pokoju: {{ room.numer }}</h1>
+<p>Pojemność pokoju: {{ room.pojemnosc_pokoju }}</p>
+<p>Obecna liczba osób: {{ room.liczba_osob }}</p>
+<p>Status: {% if room.czy_wolny %}Wolny{% else %}Pełny{% endif %}</p>
+
+{% if room.czy_wolny %}
+  <form method="post" action="{% url 'join_room' %}">
+    {% csrf_token %}
+    <button type="submit">Dołącz do pokoju</button>
+  </form>
+{% else %}
+  <p>Nie można dołączyć, pokój jest pełny.</p>
+{% endif %}
+
+<form method="post" action="{% url 'leave_room' room.id %}">
+    {% csrf_token %}
+    <button type="submit">Opuść pokój</button>
+</form>
